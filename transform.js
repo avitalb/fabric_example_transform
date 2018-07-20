@@ -1,4 +1,3 @@
-const j = require('jscodeshift');
 const babylon = require('babylon');
 const recast = require('recast');
 
@@ -15,9 +14,13 @@ function transform(file, api) {
 
   const j = api.jscodeshift;
 
-  // delete export declaration (use literal and not exportDeclaration to only delete the actual "export" word)
+  // delete export declaration (use literal and not exportDeclaration to only delete the actual "export" word) (j.literal('export'))
+  let source = j(recast.parse(file.source, { parser: { parse } }))
+    .find(j.ImportDeclaration)
+    .remove()
+    .toSource();
 
-  let source =   j(recast.parse(file.source, { parser: { parse } })).find(j.literal('export')).remove().toSource();
+    
   // // attach all imported components to the window
   // const root = j(file.source);
   // const imports = root.find(j.importDeclaration);
@@ -34,11 +37,11 @@ function transform(file, api) {
   // }
   // source.insertAfter(j.literal(' Fabric } = window.Fabric;')).toSource();
 
-  // //find name of example
-  // const exampleName = root.find(j.exportDeclaration.name);
+  // find name of example
+  // const exampleName = source.find(j.exportDeclaration.name);
 
 
-  //add footer
+  // add footer
   // j.literal("ReactDOM.render(<"+exampleName+"/>,document.getElementById('content'));"
   return source;
 }
