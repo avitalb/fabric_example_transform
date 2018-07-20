@@ -1,0 +1,7 @@
+{
+  "name": "transform",
+  "dependencies": {
+    "jscodeshift": "^0.5.1",
+    "babylon": "^6.18.0"
+  }
+}
