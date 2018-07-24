@@ -1,6 +1,6 @@
-// import * as React from 'react';
+import * as React from 'react';
 
-import { Label } from "c:/Users/t-avba/src/office-ui-fabric-react/packages/office-ui-fabric-react/src/Label";
+import { Label } from 'c:/Users/t-avba/src/office-ui-fabric-react/packages/office-ui-fabric-react/src/Label';
 
 export const LabelBasicExample = () => (
   <div>
