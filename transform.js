@@ -33,7 +33,8 @@ function transform(file, api) {
 
   let identifiers = [];
   imports.forEach(p => {
-    identifiers.push(p.node.specifiers[0].local.loc.identifierName);
+    p.node.specifiers.forEach(spec => {
+    identifiers.push(spec.local.loc.identifierName)})
   });
 
 
