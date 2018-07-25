@@ -25,7 +25,10 @@ function transform(file, api) {
   source = source.find(j.ImportDeclaration,node => node.source.value == 'react').remove().toSource();
   source = j(recast.parse(source, { parser: { parse } }));
 
-
+  //remove css import
+  source = source.find(j.ImportDeclaration,node => node.source.value.endsWith('css')).remove().toSource();
+  source = j(recast.parse(source, { parser: { parse } }));
+  
   // attach all imported components to the window
   let attachedWindowString = "let {\n";
 
