@@ -1,3 +1,15 @@
+/*
+This Transform modifies Fabric website code examples into a format that will allow them to be rendered on Codepen, as part of the "Export to Codepen" feature.
+There are two types of supported example templates:
+1) 
+[imports]
+[variable export named declaration with example code inside]
+and 
+2) 
+[imports]
+[class export named declaration with example code inside. Having multiple methods and keeping track of state is supported]
+Currently, examples which are scattered across multiple files are NOT supported.
+*/
 const babylon = require('babylon');
 const recast = require('recast');
 
@@ -5,7 +17,7 @@ function parseRaw(code) {
   const parse = source =>
   babylon.parse(source, {
     sourceType: 'module',
-    plugins: ['jsx', 'typescript']
+    plugins: ['jsx', 'typescript','classProperties']
   });
   return recast.parse(code, { parser: { parse } }).program.body;
 }
