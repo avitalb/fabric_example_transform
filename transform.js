@@ -83,7 +83,7 @@ function transform(file, api) {
   }
 
   // for examples which export react components as a class
-  else if (classExportDeclarations.paths.length > 0) {
+  else if (classExportDeclarations.__paths.length > 0) {
     // extract name
     classExportDeclarations.forEach(
       p => exampleName = p.node.declaration.id.name
