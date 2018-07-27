@@ -62,7 +62,7 @@ function transform(file, api) {
   let parsedAttachedWindowString = parseRaw(attachedWindowString);
 
   // remove the rest of the import declarations
-  source = source.find(j.ImportDeclaration).remove().toSource();
+  source = source.find(j.ImportDeclaration).remove().insertBefore(parsedAttachedWindowString).toSource();
   source = j(recast.parse(source, { parser: { parse } }));
 
   // remove exports and replace with variable or class declarations, whichever the original example used
@@ -79,7 +79,8 @@ function transform(file, api) {
 
     //extract variable declaration
     variableExportDeclarations.forEach(
-      p => source = source.find(j.ExportNamedDeclaration).replaceWith(p.node.declaration).insertBefore(parsedAttachedWindowString))
+      p => source = source.find(j.ExportNamedDeclaration).replaceWith(p.node.declaration)
+    )
   }
 
   // for examples which export react components as a class
@@ -91,7 +92,7 @@ function transform(file, api) {
     
     // extract class declaration
     classExportDeclarations.forEach(
-      p => source = source.find(j.ExportNamedDeclaration).replaceWith(p.node.declaration).insertBefore(parsedAttachedWindowString)
+      p => source = source.find(j.ExportNamedDeclaration).replaceWith(p.node.declaration)
     )
   }
 
