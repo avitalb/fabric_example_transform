@@ -44,7 +44,7 @@ function transform(file, api) {
   for (var i = 0; i < identifiers.length; i++) {
     attachedWindowString += '\t' + identifiers[i] + ',\n';
   }
-  attachedWindowString += '\t Fabric } = window.Fabric;';
+  attachedWindowString += '\tFabric } = window.Fabric;';
 
 
   let parsedAttachedWindowString = parseRaw(attachedWindowString);
@@ -60,10 +60,12 @@ function transform(file, api) {
 
   // for examples with variable export declarations
   if (variableExportDeclarations.__paths.length > 0) {
+    // extract name
     variableExportDeclarations.forEach(
       p=> exampleName = p.node.declaration.declarations[0].id.name
     )
 
+    //extract variable declaration
     variableExportDeclarations.forEach(
       p => source = source.find(j.ExportNamedDeclaration).replaceWith(p.node.declaration).insertBefore(parsedAttachedWindowString))
   }
