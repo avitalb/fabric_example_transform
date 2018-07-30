@@ -74,12 +74,9 @@ function transform(file, api) {
   if (variableExportDeclarations.__paths.length > 0) {
     // extract name
     variableExportDeclarations.forEach(
-      p=> exampleName = p.node.declaration.declarations[0].id.name
-    )
-
-    //extract variable declaration
-    variableExportDeclarations.forEach(
-      p => source = source.find(j.ExportNamedDeclaration).replaceWith(p.node.declaration)
+      p=> {exampleName = p.node.declaration.declarations[0].id.name;
+        source = source.find(j.ExportNamedDeclaration).replaceWith(p.node.declaration)
+      }
     )
   }
 
@@ -87,12 +84,8 @@ function transform(file, api) {
   else if (classExportDeclarations.__paths.length > 0) {
     // extract name
     classExportDeclarations.forEach(
-      p => exampleName = p.node.declaration.id.name
-    )
-    
-    // extract class declaration
-    classExportDeclarations.forEach(
-      p => source = source.find(j.ExportNamedDeclaration).replaceWith(p.node.declaration)
+      p => {exampleName = p.node.declaration.id.name;
+        source = source.find(j.ExportNamedDeclaration).replaceWith(p.node.declaration);}
     )
   }
 
